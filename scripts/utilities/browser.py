@@ -2,7 +2,7 @@ import os
 import xbmc
 import xbmcgui
 
-BROWSER_FILE = xbmc.translatePath('special://skin/scripts/chat/browser.txt')
+BROWSER_FILE = xbmc.translatePath('special://skin/scripts/utilities/browser.txt')
 
 def read_browser_path():
     if os.path.exists(BROWSER_FILE):
