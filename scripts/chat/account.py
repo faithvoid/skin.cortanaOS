@@ -2,7 +2,11 @@ import os
 import xbmc
 import xbmcgui
 
-LOGIN_FILE = xbmc.translatePath('special://home/userdata/profiles/{}/login.txt'.format(xbmc.getInfoLabel('System.ProfileName')))
+LOGIN_FILE = xbmc.translatePath(
+    'special://home/userdata/profiles/{}/login.txt'.format(
+        xbmc.getInfoLabel('System.ProfileName')
+    )
+)
 
 def get_user_input(heading, default_text=""):
     keyboard = xbmc.Keyboard(default_text, heading)
@@ -16,6 +20,7 @@ def save_login(username, password):
         with open(LOGIN_FILE, "w") as f:
             f.write(username + "\n")
             f.write(password)
+        xbmc.executebuiltin('Skin.SetBool(cortanaLogin,true)')
         xbmcgui.Dialog().ok("Success", "cortanaChat login details saved successfully.")
     except Exception as e:
         xbmcgui.Dialog().ok("Error", "Failed to save login: " + str(e))
@@ -42,6 +47,7 @@ def main():
                 "Would you like to edit your account information?"
             )
             if not choice:
+        	xbmc.executebuiltin('Skin.SetBool(cortanaLogin,true)')
                 return
     else:
         choice = xbmcgui.Dialog().yesno(
@@ -50,6 +56,7 @@ def main():
             "Would you like to log in to cortanaChat (powered by Bluesky)?"
         )
         if not choice:
+            xbmc.executebuiltin('Skin.SetBool(cortanaLogin,false)')
             return
 
     new_username = get_user_input("Enter Username", username if username else "")
