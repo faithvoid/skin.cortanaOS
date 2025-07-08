@@ -66,9 +66,6 @@
 - [x] Speed Test (network/speedtest.py)
 - [x] cortanaWireless (Raspberry Pi-based wireless solution) (network/wifi.py) - Needs optimizations!
 
-# Utilities
-- [x] Browser "installation" script (utilities/browser.py)
-
 # Save Games
 - [ ] Cloud save utility (using Dropbox API)
 - [ ] Per-user savegame system
