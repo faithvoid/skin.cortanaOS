@@ -1,20 +1,15 @@
-import os
 import xbmc
 import xbmcgui
-
-VC_FILE = xbmc.translatePath('special://skin/scripts/chat/vc.txt')
+import os
 
 def read_vc_path():
-    if os.path.exists(VC_FILE):
-        with open(VC_FILE, "r") as f:
-            path = f.readline().strip()
-            if os.path.exists(path):
-                return path
+    path = xbmc.getInfoLabel('Skin.String(VideoChat)')
+    if path and os.path.exists(path):
+        return path
     return None
 
 def write_vc_path(path):
-    with open(VC_FILE, "w") as f:
-        f.write(path)
+    xbmc.executebuiltin('Skin.SetString(VideoChat,%s)' % path)
 
 def browse_for_xbe():
     dialog = xbmcgui.Dialog()
@@ -24,19 +19,19 @@ def browse_for_xbe():
     return None
 
 def launch_xbe(xbe_path):
-    xbmc.executebuiltin("RunXBE(" + xbe_path + ")")
+    xbmc.executebuiltin("RunXBE(%s)" % xbe_path)
 
 def main():
-    xbe_path = read_vc_path()
     dialog = xbmcgui.Dialog()
+    xbe_path = read_vc_path()
     if xbe_path:
         launch_xbe(xbe_path)
     else:
-        if dialog.yesno("Xbox Video Chat Not Found", "Xbox Video Chat is not installed or the path is missing.", "Would you like to add it now?"):
+        if dialog.yesno("Xbox Video Chat", "Xbox Video Chat is not installed.", "Would you like to add it now?"):
             xbe_path = browse_for_xbe()
             if xbe_path:
                 write_vc_path(xbe_path)
-                if dialog.yesno("Success!", "Xbox Video Chat path has been set.", "Would you like to launch it now?"):
+                if dialog.yesno("Success!", "Xbox Video Chat has been installed.", "Would you like to launch it now?"):
                     launch_xbe(xbe_path)
 
 if __name__ == "__main__":
