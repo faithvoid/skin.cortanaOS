@@ -1,4 +1,4 @@
 # cortanaOS
 a social dashboard for XBMC4Xbox
-### Screenshots
+## Screenshots
 ![](screenshots/1.jpg)
