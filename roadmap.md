@@ -1,7 +1,9 @@
 # General
 - [x] cortanaChat dashboard integration
+- [x] cortanaCharm (gamertag reimplementation) integration
 - [x] wttr.in weather integration
 - [x] Guide button implementation
+- [x] "otherOS" operating system launcher
 - [x] Xbox Live logo integration
 - [ ] cortanaOS logo integration
 - [ ] Finish labels for easy translation
@@ -9,6 +11,7 @@
 - [ ] Finish cortanaISO (ISO/XISO ripping utility)
 - [ ] Finish RipCD script for audio CDs
 - [ ] "Menu Music" function
+- [ ] "Aero Lite" theme
 
 ### cortanaChat / Social
 - [ ] Chat client optimization
@@ -46,7 +49,7 @@
 
 ## "Media" menu
 - [x] Games / Demos / Arcade / Programs / Saved Games / File Manager / Favourites labels (as well as scripts/addons underneath Programs)
-- [x] "Watched" icon re-integrated
+- [x] "Watched" media indicator icon re-integrated
 - [ ] "Services" menu for third-party services such as Jellyfin
 - [ ] Reimplemented "add-ons" for music, videos and photos.
 
