@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+import xbmc
+import xml.etree.ElementTree as ET
+import urllib2
+
+def get_users_online(feed_url):
+    try:
+        response = urllib2.urlopen(feed_url, timeout=10)
+        xml_data = response.read()
+        root = ET.fromstring(xml_data)
+        for item in root.findall(".//item"):
+            title = item.find("title").text
+            if title.startswith("Users Online:"):
+                return int(title.split(":")[1].strip())
+    except Exception as e:
+        xbmc.log("Error fetching or parsing RSS feed: %s" % str(e), xbmc.LOGERROR)
+    return 0
+
+def main():
+    insignia_url = "https://ogxbox.org/rss/insignia.xml"
+    xlinkkai_url = "https://ogxbox.org/rss/xlinkkai.xml"
+
+    insignia_users = get_users_online(insignia_url)
+    xlinkkai_users = get_users_online(xlinkkai_url)
+
+    combined_string = "{} (Insignia) | {} (XLink Kai)".format(insignia_users, xlinkkai_users)
+    insignia_string = "{} players".format(insignia_users)
+    xlink_string = "{} players".format(xlinkkai_users)
+
+    xbmc.executebuiltin('Skin.SetString(cortanaOnlinePlayers, {})'.format(combined_string))
+    xbmc.executebuiltin('Skin.SetString(cortanaOnlineInsignia, {})'.format(insignia_string))
+    xbmc.executebuiltin('Skin.SetString(cortanaOnlineXLink, {})'.format(xlink_string))
+
+if __name__ == '__main__':
+    main()
