@@ -1,0 +1,15 @@
+<rss version="2.0">
+<channel>
+<title>Cortana News</title>
+<link>http://faithvoid.github.io/cortana</link>
+<description>Cortana - News</description>
+<language>en-us</language>
+<category>News</category>
+<item>
+<title>Cortana v0.1 - First Release</title>
+<description>
+Thank you for downloading Cortana 0.1! There are plenty more features to be implemented soon, so keep your eyes peeled for more updates on this page!
+</description>
+</item>
+</channel>
+</rss>
