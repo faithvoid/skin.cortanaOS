@@ -2,7 +2,6 @@
 import xbmc
 import xml.etree.ElementTree as ET
 import urllib2
-import time
 
 def fetch_feed_root(feed_url):
     try:
@@ -65,7 +64,7 @@ def main():
         xbmc.executebuiltin('Skin.SetString(cortanaSessionsXLink, "{}")'.format(xlinksession_string))
         xbmc.executebuiltin('Skin.SetString(cortanaSessionsInsignia, "{}")'.format(insigniasession_string))
 
-        time.sleep(60)
+        xbmc.sleep(60000)
 
 if __name__ == '__main__':
     main()
