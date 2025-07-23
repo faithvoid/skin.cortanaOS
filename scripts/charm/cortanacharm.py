@@ -2,9 +2,16 @@ import xbmc
 import xbmcgui
 import sys
 import requests
+import re
+import os
+
+def sanitize_for_fatx(name):
+    sanitized = re.sub(r'[^A-Za-z0-9_-]', '_', name)
+    return sanitized[:30]
 
 def get_xbox_live_profile():
     try:
+        # Ask user for Gamertag
         kb = xbmc.Keyboard('', 'Enter Xbox Live Gamertag')
         kb.doModal()
         if not kb.isConfirmed():
@@ -15,7 +22,7 @@ def get_xbox_live_profile():
             return
 
         # Query PlayerDB API
-        url = "https://playerdb.co/api/player/xbox/" + gamertag
+        url = "https://playerdb.co/api/player/xbox/" + gamertag.lower()
         response = requests.get(url)
         data = response.json()
 
@@ -26,6 +33,7 @@ def get_xbox_live_profile():
             reputation = profile.get("xboxOneRep", "GoodPlayer")
             accountTier = profile.get("accountTier", "Silver")
             cortanaID = username.get("username", "")
+            avatar_url = username.get("avatar", "")
 
             # Map reputation to numeric string
             rep_map = {
@@ -40,6 +48,18 @@ def get_xbox_live_profile():
             xbmc.executebuiltin('Skin.SetString(reputation,%s)' % rep_value)
             xbmc.executebuiltin('Skin.SetString(accountTier,%s)' % accountTier)
             xbmc.executebuiltin('Skin.SetString(cortanaID,%s)' % cortanaID)
+
+            # Save avatar to Q:/SANITIZED_USERNAME.png
+            if avatar_url and cortanaID:
+                safe_name = sanitize_for_fatx(cortanaID)
+                avatar_path = "Q:/%s.png" % safe_name
+                try:
+                    img_data = requests.get(avatar_url, verify=False).content
+                    with open(avatar_path, 'wb') as f:
+                        f.write(img_data)
+                    xbmc.executebuiltin('Skin.SetString(avatarPath,%s)' % avatar_path)
+                except Exception as e:
+                    xbmcgui.Dialog().ok("cortanaCharm", "Failed to save avatar: %s" % str(e))
 
             xbmcgui.Dialog().ok("cortanaCharm", "Profile synchronized successfully!")
         else:
@@ -59,6 +79,7 @@ else:
         sys.exit()
     label = valid_labels[choice]
 
+# Handle Xbox Live fetch separately
 if label == 'Get from Xbox Live':
     get_xbox_live_profile()
 
