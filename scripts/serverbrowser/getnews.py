@@ -15,7 +15,6 @@ def get_news_insignia(feed_url):
             desc_elem = item.find("description")
             if desc_elem is not None and desc_elem.text:
                 news_text = desc_elem.text.strip()
-                # Safely wrap the value in quotes and escape internal ones
                 safe_text = news_text.replace('"', "'")
                 xbmc.executebuiltin('Skin.SetString(cortanaLatestNewsInsignia, "{}")'.format(safe_text))
                 return True
@@ -33,7 +32,6 @@ def get_news_xlink(feed_url):
             desc_elem = item.find("description")
             if desc_elem is not None and desc_elem.text:
                 news_text = desc_elem.text.strip()
-                # Safely wrap the value in quotes and escape internal ones
                 safe_text = news_text.replace('"', "'")
                 xbmc.executebuiltin('Skin.SetString(cortanaLatestNewsXLink, "{}")'.format(safe_text))
                 return True
@@ -51,7 +49,6 @@ def get_news_cortana(feed_url):
             desc_elem = item.find("description")
             if desc_elem is not None and desc_elem.text:
                 news_text = desc_elem.text.strip()
-                # Safely wrap the value in quotes and escape internal ones
                 safe_text = news_text.replace('"', "'")
                 xbmc.executebuiltin('Skin.SetString(cortanaLatestNewsCortana, "{}")'.format(safe_text))
                 return True
