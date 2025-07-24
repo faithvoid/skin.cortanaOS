@@ -120,6 +120,7 @@ def main():
     insignia_sessions = get_sessions(insignia_root)
     xlinkkai_sessions = get_sessions(xlink_root)
 
+    combined_string_header = "- {} on Insignia, {} on XLink Kai -".format(insignia_users, xlinkkai_users)
     combined_string = "({} [Insignia] | {} [XLink Kai])".format(insignia_users, xlinkkai_users)
     insignia_string = "({} players)".format(insignia_users)
     xlink_string = "({} players)".format(xlinkkai_users)
@@ -130,6 +131,7 @@ def main():
     insignia_stats = get_insignia_statistics(insignia_root)
 
     xbmc.executebuiltin('Skin.SetString(cortanaOnlinePlayers, "{}")'.format(combined_string))
+    xbmc.executebuiltin('Skin.SetString(cortanaOnlinePlayersHeader, "{}")'.format(combined_string_header))
     xbmc.executebuiltin('Skin.SetString(cortanaOnlineInsignia, "{}")'.format(insignia_string))
     xbmc.executebuiltin('Skin.SetString(cortanaOnlineXLink, "{}")'.format(xlink_string))
     xbmc.executebuiltin('Skin.SetString(cortanaSessionsXLink, "{}")'.format(xlinksession_string))
@@ -147,7 +149,6 @@ def main():
     xbmc.executebuiltin('Skin.SetString(xlinkOrbitalSync, "{}")'.format(xlink_stats["orbital_sync"]))
     xbmc.executebuiltin('Skin.SetString(xlinkGameTraffic, "{}")'.format(xlink_stats["game_traffic"]))
     xbmc.executebuiltin('Skin.SetString(xlinkOrbitalTraffic, "{}")'.format(xlink_stats["orbital_traffic"]))
-
 
 if __name__ == '__main__':
     main()
