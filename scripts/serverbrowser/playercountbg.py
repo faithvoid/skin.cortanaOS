@@ -1,3 +1,4 @@
+# This will probably crash your Xbox. Don't say I didn't warn you!
 # -*- coding: utf-8 -*-
 import xbmc
 import xml.etree.ElementTree as ET
