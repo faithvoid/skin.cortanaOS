@@ -1,4 +1,4 @@
-### Guide Menu scripts
+# Guide Menu scripts
 ## dvd.py (Status: ~95%)
 - Handles ejecting/unejecting/media playback/etc via one button press and warns the user if the disc tray is empty/disc is unreadable, a-la Xbox 360.
 ## signout.py (Status: ~100%)
